@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using dominio;
+using negocio;
 
 namespace MyMProyecto
 {
@@ -19,17 +21,19 @@ namespace MyMProyecto
 
         private void FrmAltaCollar_Load(object sender, EventArgs e)
         {
+           Collar
            
-            cboColor.Items.Add("Blanco");
-            cboColor.Items.Add("Negro");
-            cboColor.Items.Add("Azul");
-            cboColor.Items.Add("Fucsia");
-            cboColor.Items.Add("Verde");
-            cboColor.Items.Add("Verde Manzana");
-            cboColor.Items.Add("Violeta");
-            cboColor.Items.Add("Rojo");
-            cboColor.Items.Add("Naranja");
-            cboColor.Items.Add("Amarillo");
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            Collar nuevo = new Collar();
+            CollarNegocio
         }
     }
 }

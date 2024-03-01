@@ -22,5 +22,11 @@ namespace MyMProyecto
             FrmAltaCliente altaCliente = new FrmAltaCliente();
             altaCliente.ShowDialog();
         }
+
+        private void agregarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmAltaCollar altaCollar = new FrmAltaCollar();
+            altaCollar.ShowDialog();
+        }
     }
 }

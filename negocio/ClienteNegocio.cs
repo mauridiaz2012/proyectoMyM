@@ -16,7 +16,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Select Nombre, NroTelefono, Direccion, RedSocial,NombreUsuarioRedSocial FROM Clientes");
+                datos.setearConsulta("Select Nombre, NroTelefono, Direccion, idRedSocial,NombreUsuarioRedSocial FROM Clientes");
                 datos.ejecutarLectura();
 
               return lista;
@@ -39,11 +39,11 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO CLIENTES(Nombre, NroTelefono, Direccion, RedSocial, NombreUsuarioRedSocial) VALUES (@Nombre, @NroTelefono, @Direccion, @RedSocial, @NombreUsuarioRedSocial)");
+                datos.setearConsulta("INSERT INTO CLIENTES(Nombre, NroTelefono, Direccion, idRedSocial, NombreUsuarioRedSocial) VALUES (@Nombre, @NroTelefono, @Direccion, @idRedSocial, @NombreUsuarioRedSocial)");
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@NroTelefono", nuevo.NroTelefono);
                 datos.setearParametro("@Direccion", nuevo.Direccion);
-                datos.setearParametro("@RedSocial", nuevo.RedSocial);
+                datos.setearParametro("@idRedSocial", nuevo.RedSocial.IdRedSocial);
                 datos.setearParametro("@NombreUsuarioRedSocial", nuevo.NombreUsuario);
 
                 datos.ejecutarAccion();

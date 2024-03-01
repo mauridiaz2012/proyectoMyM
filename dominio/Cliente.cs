@@ -11,7 +11,7 @@ namespace dominio
         public string Nombre { get; set; }
         public string NroTelefono { get; set; }
         public string Direccion { get; set; }
-        public string RedSocial { get; set; }
+        public RedSocial RedSocial { get; set; }
         public string NombreUsuario { get; set; }
     }
 }

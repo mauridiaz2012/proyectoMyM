@@ -21,14 +21,20 @@ namespace MyMProyecto
 
         private void FrmAltaCliente_Load(object sender, EventArgs e)
         {
-            //ToDo:
-            //Ver la manera de agregar un mantenimiento de Redes, en la cual se grabe
-            //la red social con un id asociado, luego vincular el cliente con una red social,
-            //como primer paso puedo crear la tabla RRSS, CodigoCollar idCollar, largoCollar, idColor,ColorCollar
-            //para asociarlos.
-            cboRedSocial.Items.Add("Instagram");
-            cboRedSocial.Items.Add("Facebook - Messenger");
-            cboRedSocial.Items.Add("WhatsApp");
+
+           RedSocialNegocio redSocialNegocio = new RedSocialNegocio();
+            try
+            {
+                cboRedSocial.DataSource = redSocialNegocio.listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
+
+
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -40,7 +46,7 @@ namespace MyMProyecto
                 cliente.Nombre = txtNombre.Text;
                 cliente.NroTelefono = txtTelefono.Text;
                 cliente.Direccion = txtDireccion.Text;
-                cliente.RedSocial = (string)cboRedSocial.SelectedItem;
+                cliente.RedSocial = (RedSocial)cboRedSocial.SelectedItem;
                 cliente.NombreUsuario = txtNombreUsuario.Text;
 
                 negocio.agregar(cliente);
