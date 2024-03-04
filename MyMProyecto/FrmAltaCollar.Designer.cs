@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lblCodigo = new System.Windows.Forms.Label();
+            this.lblLargo = new System.Windows.Forms.Label();
             this.txtTitulo = new System.Windows.Forms.Label();
             this.lblColor = new System.Windows.Forms.Label();
             this.lblPrecioCompra = new System.Windows.Forms.Label();
@@ -39,20 +39,20 @@
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.gbCollar = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboCodigoCollar = new System.Windows.Forms.ComboBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.gbCollar.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblCodigo
+            // lblLargo
             // 
-            this.lblCodigo.AutoSize = true;
-            this.lblCodigo.Location = new System.Drawing.Point(28, 39);
-            this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(59, 20);
-            this.lblCodigo.TabIndex = 18;
-            this.lblCodigo.Text = "Codigo";
+            this.lblLargo.AutoSize = true;
+            this.lblLargo.Location = new System.Drawing.Point(28, 39);
+            this.lblLargo.Name = "lblLargo";
+            this.lblLargo.Size = new System.Drawing.Size(50, 20);
+            this.lblLargo.TabIndex = 18;
+            this.lblLargo.Text = "Largo";
             // 
             // txtTitulo
             // 
@@ -117,14 +117,14 @@
             // 
             // gbCollar
             // 
-            this.gbCollar.Controls.Add(this.comboBox1);
+            this.gbCollar.Controls.Add(this.cboCodigoCollar);
             this.gbCollar.Controls.Add(this.lblCantidad);
             this.gbCollar.Controls.Add(this.txtCantidad);
             this.gbCollar.Controls.Add(this.txtPrecio);
             this.gbCollar.Controls.Add(this.lblPrecioCompra);
             this.gbCollar.Controls.Add(this.cboColor);
             this.gbCollar.Controls.Add(this.lblColor);
-            this.gbCollar.Controls.Add(this.lblCodigo);
+            this.gbCollar.Controls.Add(this.lblLargo);
             this.gbCollar.Location = new System.Drawing.Point(59, 105);
             this.gbCollar.Name = "gbCollar";
             this.gbCollar.Size = new System.Drawing.Size(315, 239);
@@ -132,13 +132,13 @@
             this.gbCollar.TabStop = false;
             this.gbCollar.Text = "Collar";
             // 
-            // comboBox1
+            // cboCodigoCollar
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(117, 31);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(68, 28);
-            this.comboBox1.TabIndex = 30;
+            this.cboCodigoCollar.FormattingEnabled = true;
+            this.cboCodigoCollar.Location = new System.Drawing.Point(117, 31);
+            this.cboCodigoCollar.Name = "cboCodigoCollar";
+            this.cboCodigoCollar.Size = new System.Drawing.Size(68, 28);
+            this.cboCodigoCollar.TabIndex = 30;
             // 
             // btnCancelar
             // 
@@ -183,7 +183,7 @@
         #endregion
 
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label lblCodigo;
+        private System.Windows.Forms.Label lblLargo;
         private System.Windows.Forms.Label txtTitulo;
         private System.Windows.Forms.Label lblColor;
         private System.Windows.Forms.Label lblPrecioCompra;
@@ -192,7 +192,7 @@
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.GroupBox gbCollar;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboCodigoCollar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
     }

@@ -8,11 +8,10 @@ namespace dominio
 {
     public class Collar
     {
-        public int Codigo { get; set; }
-        public int Largo { get; set; }
-        public string Color { get; set; }
+       // public CodigoCollar IdCollar { get; set; }
+        public CodigoCollar Largo { get; set; }
+        public ColorCollar Color { get; set; }
         public float PrecioCompra { get; set; }
-
         public int Cantidad { get; set; }
     }
 }

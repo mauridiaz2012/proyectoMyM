@@ -21,7 +21,27 @@ namespace MyMProyecto
 
         private void FrmAltaCollar_Load(object sender, EventArgs e)
         {
-           Collar
+           ColorCollarNegocio colorCollarNegocio = new ColorCollarNegocio();
+            try
+            {
+                cboColor.DataSource = colorCollarNegocio.listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
+            CodigoCollarNegocio codigoCollarNegocio = new CodigoCollarNegocio();
+            try
+            {
+                cboCodigoCollar.DataSource = codigoCollarNegocio.listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
            
         }
 
@@ -32,8 +52,25 @@ namespace MyMProyecto
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Collar nuevo = new Collar();
-            CollarNegocio
+            Collar collar = new Collar();
+            CollarNegocio negocio = new CollarNegocio();
+            try
+            {
+                collar.Largo = (CodigoCollar)cboCodigoCollar.SelectedItem;
+                collar.Color = (ColorCollar)cboColor.SelectedItem;
+                collar.PrecioCompra = float.Parse(txtPrecio.Text);
+                collar.Cantidad = int.Parse(txtCantidad.Text);
+
+                negocio.agregar(collar);
+                MessageBox.Show("Collar agregado exitosamente");
+                Close(); 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                throw;
+            }
         }
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    public class CodigoCollar
+    public class ColorCollar
     {
-        public int IdCodigoCollar { get; set; }
-        public string Largo { get; set;}
+        public int IdColor;
+        public string Color;
 
         public override string ToString()
         {
-            return Largo;
+            return Color;
         }
     }
 }

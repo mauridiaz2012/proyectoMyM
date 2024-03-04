@@ -7,7 +7,7 @@ using dominio;
 
 namespace negocio
 {
-    internal class CollarNegocio
+    public class CollarNegocio
     {
         public List<Collar> listar()
         {
@@ -46,7 +46,9 @@ namespace negocio
 
                 try
                 {
-                    datos.setearConsulta("INSERT INTO Collares (idCodigoCollar, idColor, precioCompra, cantidad) VALUES (@idcollar, @idcodigocollar, @idcolor, @preciocompra, @cantidad)");
+                    datos.setearConsulta("INSERT INTO dbo.Collares (CodigoCollar, IDColor, PrecioCompra, Cantidad) VALUES (@codigocollar, @idcolor, @preciocompra, @cantidad)");
+                    datos.setearParametro("@codigocollar", nuevo.Largo.IdCodigoCollar);
+                    datos.setearParametro("@idcolor", nuevo.Color.IdColor);
                     datos.setearParametro("@preciocompra", nuevo.PrecioCompra);
                     datos.setearParametro("@cantidad", nuevo.Cantidad);
                     
