@@ -15,13 +15,13 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT idCodigoCollar, largo FROM CodigosCollares");
+                datos.setearConsulta("SELECT codigoCollar, largo FROM CodigosCollares");
                 datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
                 {
                     CodigoCollar aux    = new CodigoCollar();
-                    aux.IdCodigoCollar = (int)datos.Lector["idCodigoCollar"];
+                    aux.IdCodigoCollar = (int)datos.Lector["codigoCollar"];
                     aux.Largo = (string)datos.Lector["largo"];
 
                     lista.Add(aux);

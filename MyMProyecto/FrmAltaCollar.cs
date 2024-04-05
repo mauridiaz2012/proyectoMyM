@@ -58,7 +58,7 @@ namespace MyMProyecto
             {
                 collar.Largo = (CodigoCollar)cboCodigoCollar.SelectedItem;
                 collar.Color = (ColorCollar)cboColor.SelectedItem;
-                collar.PrecioCompra = float.Parse(txtPrecio.Text);
+                collar.PrecioCompra = decimal.Parse(txtPrecio.Text);
                 collar.Cantidad = int.Parse(txtCantidad.Text);
 
                 negocio.agregar(collar);

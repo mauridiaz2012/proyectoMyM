@@ -58,6 +58,18 @@
     <Compile Include="FrmAltaCollar.Designer.cs">
       <DependentUpon>FrmAltaCollar.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCliente.Designer.cs">
+      <DependentUpon>FrmCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCollares.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCollares.Designer.cs">
+      <DependentUpon>FrmCollares.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +83,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAltaCollar.resx">
       <DependentUpon>FrmAltaCollar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCliente.resx">
+      <DependentUpon>FrmCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCollares.resx">
+      <DependentUpon>FrmCollares.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>

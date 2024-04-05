@@ -35,6 +35,8 @@
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collaresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.listarCollaresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listarClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +66,8 @@
             // 
             this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarToolStripMenuItem,
-            this.modificarToolStripMenuItem});
+            this.modificarToolStripMenuItem,
+            this.listarClientesToolStripMenuItem});
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
             this.clientesToolStripMenuItem.Text = "Clientes";
@@ -72,20 +75,22 @@
             // agregarToolStripMenuItem
             // 
             this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(189, 34);
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.agregarToolStripMenuItem.Text = "Agregar";
             this.agregarToolStripMenuItem.Click += new System.EventHandler(this.agregarToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(189, 34);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // collaresToolStripMenuItem
             // 
             this.collaresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agregarToolStripMenuItem1});
+            this.agregarToolStripMenuItem1,
+            this.listarCollaresToolStripMenuItem});
             this.collaresToolStripMenuItem.Name = "collaresToolStripMenuItem";
             this.collaresToolStripMenuItem.Size = new System.Drawing.Size(90, 29);
             this.collaresToolStripMenuItem.Text = "Collares";
@@ -96,6 +101,20 @@
             this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.agregarToolStripMenuItem1.Text = "Agregar";
             this.agregarToolStripMenuItem1.Click += new System.EventHandler(this.agregarToolStripMenuItem1_Click);
+            // 
+            // listarCollaresToolStripMenuItem
+            // 
+            this.listarCollaresToolStripMenuItem.Name = "listarCollaresToolStripMenuItem";
+            this.listarCollaresToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.listarCollaresToolStripMenuItem.Text = "Listar Collares";
+            this.listarCollaresToolStripMenuItem.Click += new System.EventHandler(this.listarCollaresToolStripMenuItem_Click);
+            // 
+            // listarClientesToolStripMenuItem
+            // 
+            this.listarClientesToolStripMenuItem.Name = "listarClientesToolStripMenuItem";
+            this.listarClientesToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.listarClientesToolStripMenuItem.Text = "Listar Clientes";
+            this.listarClientesToolStripMenuItem.Click += new System.EventHandler(this.listarClientesToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 
@@ -125,6 +144,8 @@
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem collaresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem listarCollaresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listarClientesToolStripMenuItem;
     }
 }
 
