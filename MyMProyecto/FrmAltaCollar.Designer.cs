@@ -78,7 +78,7 @@
             // lblPrecioCompra
             // 
             this.lblPrecioCompra.AutoSize = true;
-            this.lblPrecioCompra.Location = new System.Drawing.Point(28, 130);
+            this.lblPrecioCompra.Location = new System.Drawing.Point(28, 160);
             this.lblPrecioCompra.Name = "lblPrecioCompra";
             this.lblPrecioCompra.Size = new System.Drawing.Size(53, 20);
             this.lblPrecioCompra.TabIndex = 22;
@@ -87,7 +87,7 @@
             // lblCantidad
             // 
             this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(28, 170);
+            this.lblCantidad.Location = new System.Drawing.Point(28, 121);
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(73, 20);
             this.lblCantidad.TabIndex = 23;
@@ -98,21 +98,21 @@
             this.cboColor.FormattingEnabled = true;
             this.cboColor.Location = new System.Drawing.Point(117, 74);
             this.cboColor.Name = "cboColor";
-            this.cboColor.Size = new System.Drawing.Size(135, 28);
+            this.cboColor.Size = new System.Drawing.Size(148, 28);
             this.cboColor.TabIndex = 24;
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(117, 124);
+            this.txtPrecio.Location = new System.Drawing.Point(117, 154);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(135, 26);
+            this.txtPrecio.Size = new System.Drawing.Size(148, 26);
             this.txtPrecio.TabIndex = 27;
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(117, 164);
+            this.txtCantidad.Location = new System.Drawing.Point(117, 115);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(135, 26);
+            this.txtCantidad.Size = new System.Drawing.Size(148, 26);
             this.txtCantidad.TabIndex = 28;
             // 
             // gbCollar

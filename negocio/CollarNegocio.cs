@@ -17,16 +17,27 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT idCollar, idCodigoCollar, idColor, precioCompra, cantidad FROM Collares ");
+                datos.setearConsulta("SELECT c.CodigoCollar,cod.largo,sum(c.Cantidad) as SumCantidad,col.color,c.PrecioCompra FROM Collares c INNER JOIN ColoresCollares col ON c.IDColor = col.idColor INNER JOIN  CodigosCollares cod ON c.CodigoCollar = cod.codigoCollar GROUP BY c.CodigoCollar, col.color,cod.largo,c.PrecioCompra");
                 datos.ejecutarLectura();
 
-                while(datos.Lector.Read())
-                {
-                    //ToDO
-                    //Hacer la carga de los datos del Collar en la lista
-                    Collar aux = new Collar();
-                    
-                }
+                   while(datos.Lector.Read())
+                    {
+                        Collar aux = new Collar();
+                        aux.IdCollar = (int)datos.Lector["CodigoCollar"];
+                        aux.PrecioCompra = (decimal)datos.Lector["PrecioCompra"];
+                        aux.Cantidad = (int)datos.Lector["SumCantidad"];
+
+                        aux.Color = new ColorCollar();
+                        aux.Color.Color = (string)datos.Lector["color"];
+
+                        aux.Largo = new CodigoCollar();
+                        aux.Largo.Largo = (string)datos.Lector["largo"];
+
+                        lista.Add(aux);
+
+                    }
+                
+
                 return lista;
             }
             catch (Exception ex)

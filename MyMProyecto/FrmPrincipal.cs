@@ -28,5 +28,11 @@ namespace MyMProyecto
             FrmAltaCollar altaCollar = new FrmAltaCollar();
             altaCollar.ShowDialog();
         }
+
+        private void listarCollaresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCollares listarCollares = new FrmCollares();
+            listarCollares.ShowDialog();
+        }
     }
 }
