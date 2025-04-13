@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bordado.cs" />
-    <Compile Include="BordadoDetalle.cs" />
+    <Compile Include="EstadoPedido.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="PedidoDetalle.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="CodigoCollar.cs" />
     <Compile Include="Collar.cs" />

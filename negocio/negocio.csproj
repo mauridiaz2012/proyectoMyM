@@ -46,6 +46,7 @@
     <Compile Include="CodigoCollarNegocio.cs" />
     <Compile Include="CollarNegocio.cs" />
     <Compile Include="ColorCollarNegocio.cs" />
+    <Compile Include="PedidoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedSocialNegocio.cs" />
   </ItemGroup>

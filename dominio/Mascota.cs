@@ -9,8 +9,11 @@ namespace dominio
     public class Mascota
     {
         public string Nombre { get; set; }
-        public string NroTelefono { get; set; }
+       // public string NroTelefono { get; set; }
+
         public int MedidaCollar { get; set; }
         public string TipoMascota {  get; set; }
+
+        public Cliente Duenio { get; set; }
     }
 }
