@@ -7,14 +7,22 @@ using System.Threading.Tasks;
 
 namespace negocio
 {
-    internal class PedidoNegocio
+    public class PedidoNegocio
     {
         private readonly AccesoDatos datos = new AccesoDatos();
 
         public void CrearPedido(Pedido pedido)
         {
+            
             try
             {
+                //Consultamos el stock antes de crear un nuevo pedido.
+                foreach (var detalle in pedido.Detalles)
+                {
+                    if (detalle.Collar.Cantidad < detalle.Cantidad)
+                        throw new Exception($"Stock insuficiente para el collar {detalle.Collar.IdCollar}");
+                }
+
                 //Iniciar transaccion para asegurar integridad
                 datos.setearConsulta("BEGIN TRANSACTION");
                 datos.ejecutarAccion();
@@ -53,7 +61,7 @@ namespace negocio
                     datos.ejecutarAccion();
                 }
 
-                //Actualizar el stick de Collares
+                //Actualizar el stock de Collares
                 foreach (var detalle in pedido.Detalles)
                 {
                     string consultaStock = @";
@@ -68,6 +76,7 @@ namespace negocio
                     datos.setearParametro("@Cantidad", detalle.Collar.Cantidad);
                     datos.ejecutarAccion();
                 }
+
 
                 //Confirmar transaccion
                 datos.setearConsulta("COMMIT TRANSACTION");
@@ -85,6 +94,24 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
+
         }
+        // Método auxiliar para obtener el stock actual de un collar
+        private int ObtenerStockCollar(int idCollar)
+        {
+            datos.setearConsulta("SELECT Cantidad FROM Collares WHERE IdCollar = @IdCollar");
+            datos.setearParametro("@IdCollar", idCollar);
+            datos.ejecutarLectura();
+
+            if (datos.Lector.Read())
+            {
+                return Convert.ToInt32(datos.Lector["Cantidad"]);
+            }
+            else
+            {
+                throw new Exception($"Collar con ID {idCollar} no encontrado.");
+            }
+        }
+
     }
 }

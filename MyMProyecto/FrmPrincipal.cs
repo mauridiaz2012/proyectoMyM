@@ -50,5 +50,11 @@ namespace MyMProyecto
             FrmCliente listarClientes = new FrmCliente();
             listarClientes.ShowDialog();
         }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPedido pedido = new FrmPedido();
+            pedido.ShowDialog();
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace dominio
         public ColorCollar IdColor {  get; set; }
         public ColorCollar Color { get; set; }
         public decimal PrecioCompra { get; set; }
+
         public int Cantidad { get; set; }
     }
 }
