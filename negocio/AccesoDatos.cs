@@ -12,11 +12,31 @@ namespace negocio
         private SqlCommand comando;
         private SqlDataReader lector;
 
+        //Metodo SqlTransaction para manejar transacciones reales.
+        private SqlTransaction transaccion;
+
         public SqlDataReader Lector
         {
             get { return lector; }
         }
 
+        public void iniciarTransaccion()
+        {
+            comando.Connection = conexion;
+            conexion.Open();
+            transaccion = conexion.BeginTransaction();
+            comando.Transaction = transaccion;
+        }
+        
+        public void confirmarTransaccion()
+        {
+            transaccion.Commit();
+        }
+
+        public void revertirTransaccion()
+        {
+            transaccion.Rollback();
+        }
         public AccesoDatos()
         {
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=MyMBordados; integrated security = true");
@@ -34,7 +54,9 @@ namespace negocio
             comando.Connection = conexion;
             try
             {
-                conexion.Open();
+               // conexion.Open();
+               if(conexion.State != System.Data.ConnectionState.Open)
+                { conexion.Open(); }
                 lector = comando.ExecuteReader();
             }
             catch (Exception ex)
@@ -49,6 +71,7 @@ namespace negocio
             comando.Connection = conexion;
             try
             {
+               if(conexion.State != System.Data.ConnectionState.Open)
                 conexion.Open();
                 comando.ExecuteNonQuery();
             }
@@ -77,7 +100,8 @@ namespace negocio
             comando.Connection = conexion;
             try
             {
-                conexion.Open();
+                if(conexion.State != System.Data.ConnectionState.Open)
+                     conexion.Open();
                 return comando.ExecuteScalar();
             }
             catch (Exception ex)

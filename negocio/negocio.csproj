@@ -46,6 +46,8 @@
     <Compile Include="CodigoCollarNegocio.cs" />
     <Compile Include="CollarNegocio.cs" />
     <Compile Include="ColorCollarNegocio.cs" />
+    <Compile Include="PagoNegocio.cs" />
+    <Compile Include="PatronNegocio.cs" />
     <Compile Include="PedidoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedSocialNegocio.cs" />
@@ -55,6 +57,9 @@
       <Project>{5ec78669-523f-45cf-a572-a1915dfa7d16}</Project>
       <Name>dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EstadoPedido.cs" />
+    <Compile Include="Pago.cs" />
+    <Compile Include="Patron.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="PedidoDetalle.cs" />
     <Compile Include="Cliente.cs" />

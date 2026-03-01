@@ -13,7 +13,8 @@ namespace dominio
 
         public int MedidaCollar { get; set; }
         public string TipoMascota {  get; set; }
-
+        
+        public int IdCliente { get; set; }
         public Cliente Duenio { get; set; }
     }
 }

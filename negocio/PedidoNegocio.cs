@@ -16,20 +16,27 @@ namespace negocio
             
             try
             {
-                //Consultamos el stock antes de crear un nuevo pedido.
+                //Consultamos el stock Real antes de crear un nuevo pedido.
                 foreach (var detalle in pedido.Detalles)
                 {
-                    if (detalle.Collar.Cantidad < detalle.Cantidad)
-                        throw new Exception($"Stock insuficiente para el collar {detalle.Collar.IdCollar}");
+                  //  if (detalle.Collar.Cantidad < detalle.Cantidad)
+                  //      throw new Exception($"Stock insuficiente para el collar {detalle.Collar.IdCollar}");
+
+                    int stockActual = ObtenerStockCollar(detalle.Collar.IdCollar);
+                    if (stockActual < detalle.Cantidad)
+                        throw new Exception($"Stock insuficiente para el collar: {detalle.Collar.IdCollar}");
+
                 }
 
-                //Iniciar transaccion para asegurar integridad
-                datos.setearConsulta("BEGIN TRANSACTION");
-                datos.ejecutarAccion();
 
+                //Iniciar transaccion para asegurar integridad
+                // datos.setearConsulta("BEGIN TRANSACTION");
+                // datos.ejecutarAccion();
+
+                datos.iniciarTransaccion();
                 //Insertamos el pedido en la tabla Pedidos
                 string consulta = @"
-                    INSERT INTO Pedidos (Estad, Fecha, IdCliente, PrecioTotal)
+                    INSERT INTO Pedidos (Estado, Fecha, IdCliente, PrecioTotal)
                     OUTPUT INSERTED.IdPedido
                     VALUES(@Estado, @Fecha, @IdCliente, @PrecioTotal);
                 ";
@@ -39,8 +46,6 @@ namespace negocio
                 datos.setearParametro("@Fecha", pedido.Fecha);
                 datos.setearParametro("@IdCliente", pedido.Cliente.IdCliente);
                 datos.setearParametro("@PrecioTotal", pedido.PrecioTotal);
-
-
                 //Obtener el id del nuevo pedido
                 int idPedido = Convert.ToInt32(datos.ejecutarScalar()); 
 
@@ -64,7 +69,7 @@ namespace negocio
                 //Actualizar el stock de Collares
                 foreach (var detalle in pedido.Detalles)
                 {
-                    string consultaStock = @";
+                    string consultaStock = @"
                     UPDATE Collares 
                     SET Stock = Stock - @Cantidad
                     WHERE IdCollar = @IdCollar AND IdColor = @IdColor;
@@ -73,21 +78,23 @@ namespace negocio
                     datos.setearConsulta(consultaStock);
                     datos.setearParametro("@IdCollar", detalle.Collar.IdCollar);
                     datos.setearParametro("@IdColor", detalle.Collar.IdColor);
-                    datos.setearParametro("@Cantidad", detalle.Collar.Cantidad);
+                    datos.setearParametro("@Cantidad", detalle.Cantidad);
                     datos.ejecutarAccion();
                 }
 
 
                 //Confirmar transaccion
-                datos.setearConsulta("COMMIT TRANSACTION");
-                datos.ejecutarAccion();
+                //datos.setearConsulta("COMMIT TRANSACTION");
+                //datos.ejecutarAccion();
+                datos.confirmarTransaccion();
             
             }
             catch (Exception ex)
             {
                 //Rollback en caso de error
-                datos.setearConsulta("ROLLBACK TRANSACTION");
-                datos.ejecutarAccion();
+                //datos.setearConsulta("ROLLBACK TRANSACTION");
+                //datos.ejecutarAccion();
+                datos.revertirTransaccion();
                 throw new Exception ("Error al crear el pedido: " + ex.Message);
             }
             finally
