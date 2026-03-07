@@ -9,11 +9,22 @@ namespace dominio
     public class Collar
     {
         public int IdCollar { get; set; }
-        public CodigoCollar Largo { get; set; }
-        public ColorCollar IdColor {  get; set; }
-        public ColorCollar Color { get; set; }
-        public decimal PrecioCompra { get; set; }
 
+        public string CodigoCollar { get; set; }
+        public decimal PrecioCompra { get; set; }
         public int Cantidad { get; set; }
+        public bool AdmiteDosLineas { get; set; }
+
+        //Claves Foraneas
+        public int IdColor { get; set; }
+        public int IdCodigoCollar { get; set; }
+
+        //Relaciones
+        public ColorCollar Color { get; set; }
+        public CodigoCollar Largo { get; set; }
+ 
+        
+
+        
     }
 }

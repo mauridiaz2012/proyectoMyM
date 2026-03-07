@@ -14,38 +14,49 @@ namespace negocio
         {
             List<Cliente> lista = new List<Cliente>();
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
-                datos.setearConsulta("Select c.Nombre, c.NroTelefono, c.Direccion, rs.nombreRedSocial, c.NombreUsuarioRedSocial FROM Clientes c INNER JOIN RRSS rs ON rs.idRedSocial = C.idRedSocial");
+                datos.setearConsulta(@"
+            SELECT  c.IDCliente,
+                    c.Nombre,
+                    c.NroTelefono,
+                    c.Direccion,
+                    c.NombreUsuarioRedSocial,
+                    c.idRedSocial,
+                    rs.nombreRedSocial
+            FROM Clientes c
+            LEFT JOIN RRSS rs ON rs.idRedSocial = c.idRedSocial");
+
                 datos.ejecutarLectura();
+
                 while (datos.Lector.Read())
                 {
                     Cliente aux = new Cliente();
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.NroTelefono = (string)datos.Lector["NroTelefono"];
-                    aux.Direccion = (string)datos.Lector["Direccion"];
-                    aux.NombreUsuario = (string)datos.Lector["NombreUsuarioRedSocial"];
-                    
-                    aux.RedSocial = new RedSocial();
-                    aux.RedSocial.nombreRedSocial = (string)datos.Lector["nombreRedSocial"];
-                
+                    aux.IdCliente = Convert.ToInt32(datos.Lector["IDCliente"]);
+                    aux.Nombre = datos.Lector["Nombre"].ToString();
+                    aux.NroTelefono = datos.Lector["NroTelefono"] == DBNull.Value ? null : datos.Lector["NroTelefono"].ToString();
+                    aux.Direccion = datos.Lector["Direccion"] == DBNull.Value ? null : datos.Lector["Direccion"].ToString();
+                    aux.NombreUsuario = datos.Lector["NombreUsuarioRedSocial"] == DBNull.Value ? null : datos.Lector["NombreUsuarioRedSocial"].ToString();
+
+                    if (datos.Lector["idRedSocial"] != DBNull.Value)
+                    {
+                        aux.RedSocial = new RedSocial();
+                        aux.RedSocial.IdRedSocial = Convert.ToInt32(datos.Lector["idRedSocial"]);
+                        aux.RedSocial.nombreRedSocial = datos.Lector["nombreRedSocial"].ToString();
+                    }
+
                     lista.Add(aux);
                 }
-
-              return lista;
+                return lista;
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
-
-
         }
 
         public void agregar(Cliente nuevo)

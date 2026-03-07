@@ -8,9 +8,8 @@ namespace dominio
 {
     public class ColorCollar
     {
-        public int IdColor;
-        public string Color;
-
+        public int IdColor { get; set; }
+        public string Color { get; set; }
         public override string ToString()
         {
             return Color;

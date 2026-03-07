@@ -2,15 +2,15 @@
 using negocio;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace MyMProyecto
 {
     public partial class FrmPedido : Form
     {
-        private List<PedidoDetalle> detallesPedido = new List<PedidoDetalle>();
         private BindingList<PedidoDetalle> bindingDetalles = new BindingList<PedidoDetalle>();
+        private decimal totalPedido = 0;
 
         public FrmPedido()
         {
@@ -27,70 +27,161 @@ namespace MyMProyecto
         {
             try
             {
-                // Cargar clientes
+                // Clientes
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
                 cboCliente.DataSource = clienteNegocio.listar();
                 cboCliente.DisplayMember = "Nombre";
                 cboCliente.ValueMember = "IdCliente";
+                cboCliente.SelectedIndex = -1;
+                MessageBox.Show("Clientes OK");
 
-                // Cargar collares disponibles
+                // Collares
                 CollarNegocio collarNegocio = new CollarNegocio();
-                cboCollar.DataSource = collarNegocio.listar(); //ToDo ver de agregar metodo listar con Stock
-                cboCollar.DisplayMember = "Descripcion"; // Ej: "30cm - Rojo"
+                cboCollar.DataSource = collarNegocio.listarConStock();
+                cboCollar.DisplayMember = "CodigoCollar";
                 cboCollar.ValueMember = "IdCollar";
+                cboCollar.SelectedIndex = -1;
+                MessageBox.Show("Collares OK");
+
+                // Colores
+                ColorCollarNegocio colorNegocio = new ColorCollarNegocio();
+                cboColor.DataSource = colorNegocio.listar();
+                cboColor.DisplayMember = "Color";
+                cboColor.ValueMember = "IdColor";
+                cboColor.SelectedIndex = -1;
+                MessageBox.Show("Colores OK");
+
+                // Patrones
+                PatronNegocio patronNegocio = new PatronNegocio();
+                cboPatron.DataSource = patronNegocio.ObtenerActivos();
+                cboPatron.DisplayMember = "NombrePatron";
+                cboPatron.ValueMember = "IdPatron";
+                cboPatron.SelectedIndex = -1;
+                MessageBox.Show("Patrones OK");
+
+                cboMascota.DataSource = null;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Error al cargar datos: " + ex.Message);
             }
         }
+
+
 
         private void ConfigurarGrilla()
         {
             dgvDetalles.AutoGenerateColumns = false;
             dgvDetalles.DataSource = bindingDetalles;
+            dgvDetalles.AllowUserToAddRows = false;
 
-            // Configurar columnas
             dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "Collar.Descripcion",
-                HeaderText = "Collar"
+                DataPropertyName = "ResumenDetalle",
+                HeaderText = "Detalle",
+                Width = 400,
+                ReadOnly = true
             });
-
             dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Cantidad",
-                HeaderText = "Cantidad"
+                HeaderText = "Cant.",
+                Width = 60,
+                ReadOnly = true
             });
-
             dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "PatronBordado",
-                HeaderText = "Patrón"
+                DataPropertyName = "PrecioUnitario",
+                HeaderText = "Precio Unit.",
+                Width = 100,
+                ReadOnly = true
             });
+        }
+
+        // Al cambiar el cliente, cargamos sus mascotas
+        private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboCliente.SelectedItem == null) return;
+            if(cboCliente.SelectedIndex == -1) return;
+
+            try
+            {
+                Cliente clienteSeleccionado = (Cliente)cboCliente.SelectedItem;
+                MascotaNegocio mascotaNegocio = new MascotaNegocio();
+
+                cboMascota.DataSource = mascotaNegocio.ObtenerPorCliente(clienteSeleccionado.IdCliente);
+                cboMascota.DisplayMember = "Nombre";
+                cboMascota.ValueMember = "IdMascota";
+                cboMascota.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar mascotas: " + ex.Message);
+            }
+        }
+
+        // Al cambiar el collar, habilitamos o deshabilitamos DatoLinea2
+        private void cboCollar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboCollar.SelectedItem == null) return;
+
+            Collar collarSeleccionado = (Collar)cboCollar.SelectedItem;
+
+            // Si el collar admite dos líneas habilitamos el segundo campo
+            txtDatoLinea2.Enabled = collarSeleccionado.AdmiteDosLineas;
+            lblDatoLinea2.ForeColor = collarSeleccionado.AdmiteDosLineas
+                ? System.Drawing.Color.Black
+                : System.Drawing.Color.Gray;
+
+            if (!collarSeleccionado.AdmiteDosLineas)
+                txtDatoLinea2.Text = string.Empty;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
             {
-                Collar collarSeleccionado = (Collar)cboCollar.SelectedItem;
+                // Validaciones
+                if (cboCliente.SelectedItem == null) { MessageBox.Show("Seleccione un cliente."); return; }
+                if (cboMascota.SelectedItem == null) { MessageBox.Show("Seleccione una mascota."); return; }
+                if (cboCollar.SelectedItem == null) { MessageBox.Show("Seleccione un collar."); return; }
+                if (cboColor.SelectedItem == null) { MessageBox.Show("Seleccione un color."); return; }
+                if (cboPatron.SelectedItem == null) { MessageBox.Show("Seleccione un patrón."); return; }
+                if (string.IsNullOrWhiteSpace(txtDatoLinea1.Text)) { MessageBox.Show("Ingrese el dato de bordado."); return; }
+                if (nudCantidad.Value <= 0) { MessageBox.Show("Ingrese una cantidad válida."); return; }
 
-                // Validar
-                if (nudCantidad.Value <= 0)
+                if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precioUnitario) || precioUnitario <= 0)
                 {
-                    MessageBox.Show("Ingrese una cantidad válida");
+                    MessageBox.Show("Ingrese un precio válido.");
                     return;
                 }
 
-                // Crear detalle
+                Collar collarSeleccionado = (Collar)cboCollar.SelectedItem;
+                ColorCollar colorSeleccionado = (ColorCollar)cboColor.SelectedItem;
+                Mascota mascotaSeleccionada = (Mascota)cboMascota.SelectedItem;
+                Patron patronSeleccionado = (Patron)cboPatron.SelectedItem;
+
+                // Validar stock
+                if (collarSeleccionado.Cantidad < (int)nudCantidad.Value)
+                {
+                    MessageBox.Show($"Stock insuficiente. Stock disponible: {collarSeleccionado.Cantidad}");
+                    return;
+                }
+
                 PedidoDetalle detalle = new PedidoDetalle()
                 {
                     Collar = collarSeleccionado,
+                    IdCollar = collarSeleccionado.IdCollar,
+                    Color = colorSeleccionado,
+                    IdColor = colorSeleccionado.IdColor,
+                    Mascota = mascotaSeleccionada,
+                    IdMascota = mascotaSeleccionada.IdMascota,
+                    PatronBordado = patronSeleccionado.NombrePatron,
+                    DatoLinea1 = txtDatoLinea1.Text.Trim(),
+                    DatoLinea2 = collarSeleccionado.AdmiteDosLineas ? txtDatoLinea2.Text.Trim() : null,
                     Cantidad = (int)nudCantidad.Value,
-                    PatronBordado = txtPatron.Text,
-                    PrecioUnitario = float.Parse(txtPrecioVenta.Text) // Asignar precio actual
-            };
+                    PrecioUnitario = precioUnitario
+                };
 
                 bindingDetalles.Add(detalle);
                 CalcularTotal();
@@ -98,24 +189,30 @@ namespace MyMProyecto
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Error al agregar detalle: " + ex.Message);
             }
         }
 
         private void CalcularTotal()
         {
-            float total = 0;
+            totalPedido = 0;
             foreach (var detalle in bindingDetalles)
-            {
-                total += detalle.Cantidad * detalle.PrecioUnitario;
-            }
-            lblTotal.Text = total.ToString("C");
+                totalPedido += detalle.Cantidad * detalle.PrecioUnitario;
+
+            lblTotal.Text = totalPedido.ToString("C");
         }
 
         private void LimpiarControlesDetalle()
         {
+            cboCollar.SelectedIndex = -1;
+            cboColor.SelectedIndex = -1;
+            cboPatron.SelectedIndex = -1;
+            cboMascota.SelectedIndex = -1;
+            txtDatoLinea1.Text = string.Empty;
+            txtDatoLinea2.Text = string.Empty;
+            txtDatoLinea2.Enabled = false;
             nudCantidad.Value = 1;
-            txtPatron.Text = string.Empty;
+            txtPrecioUnitario.Text = string.Empty;
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
@@ -129,43 +226,46 @@ namespace MyMProyecto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            PedidoNegocio pedidoNegocio = new PedidoNegocio();
-
             try
             {
-                // Validaciones básicas
                 if (cboCliente.SelectedItem == null)
                 {
-                    MessageBox.Show("Seleccione un cliente");
+                    MessageBox.Show("Seleccione un cliente.");
                     return;
                 }
-
                 if (bindingDetalles.Count == 0)
                 {
-                    MessageBox.Show("Agregue al menos un collar al pedido");
+                    MessageBox.Show("Agregue al menos un collar al pedido.");
                     return;
                 }
 
-                // Crear objeto Pedido
                 Pedido nuevoPedido = new Pedido()
                 {
                     Fecha = DateTime.Now,
                     Estado = EstadoPedido.Pendiente,
                     Cliente = (Cliente)cboCliente.SelectedItem,
+                    IdCliente = ((Cliente)cboCliente.SelectedItem).IdCliente,
                     Detalles = new List<PedidoDetalle>(bindingDetalles),
-                    PrecioTotal = float.Parse(lblTotal.Text.Replace("$", ""))
+                    PrecioTotal = totalPedido
                 };
 
-                // Guardar en BD
+                PedidoNegocio pedidoNegocio = new PedidoNegocio();
                 pedidoNegocio.CrearPedido(nuevoPedido);
 
-                MessageBox.Show("Pedido registrado exitosamente!");
+                MessageBox.Show("¡Pedido registrado exitosamente!");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Error al guardar pedido: " + ex.Message);
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    
     }
 }

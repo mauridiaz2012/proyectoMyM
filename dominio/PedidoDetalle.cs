@@ -10,9 +10,11 @@ namespace dominio
     {
         public int IdDetalle {  get; set; }
 
+        public string DatoLinea1 { get; set; }
+        public string DatoLinea2 { get; set; }
         public string PatronBordado { get; set; }
         public int Cantidad {  get; set; }
-        public float PrecioUnitario { get; set; }
+        public decimal PrecioUnitario { get; set; }
 
         //Claves foraneas
         public int IdPedido { get; set; }
@@ -24,7 +26,11 @@ namespace dominio
         //Relaciones
         public Pedido Pedido { get; set; }
         public Collar Collar {  get; set; }
+        public ColorCollar Color { get; set; }
         public Mascota Mascota { get; set; }
+
+        //Propiedad calculada para mostrar en la grilla
+        public string ResumenDetalle => $"{Mascota?.Nombre}| {Collar?.IdCollar} | {Color.Color} |{PatronBordado}|{DatoLinea1} {DatoLinea2}";
         
     }
 }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Envio.cs" />
     <Compile Include="EstadoPedido.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="Patron.cs" />

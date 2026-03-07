@@ -14,7 +14,7 @@ namespace dominio
 
      
        
-        public float PrecioTotal {  get; set; }
+        public decimal PrecioTotal {  get; set; }
         public DateTime Fecha { get; set; }
         public int IdCliente { get; set; }
         public Cliente Cliente { get; set; }

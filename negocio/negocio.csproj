@@ -46,6 +46,8 @@
     <Compile Include="CodigoCollarNegocio.cs" />
     <Compile Include="CollarNegocio.cs" />
     <Compile Include="ColorCollarNegocio.cs" />
+    <Compile Include="EnvioNegocio.cs" />
+    <Compile Include="MascotaNegocio.cs" />
     <Compile Include="PagoNegocio.cs" />
     <Compile Include="PatronNegocio.cs" />
     <Compile Include="PedidoNegocio.cs" />

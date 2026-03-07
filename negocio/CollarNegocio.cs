@@ -13,36 +13,107 @@ namespace negocio
         {
             List<Collar> lista = new List<Collar>();
             AccesoDatos datos = new AccesoDatos();
-
-
             try
             {
-                datos.setearConsulta("SELECT c.CodigoCollar,cod.largo,sum(c.Cantidad) as SumCantidad,col.color,c.PrecioCompra FROM Collares c INNER JOIN ColoresCollares col ON c.IDColor = col.idColor INNER JOIN  CodigosCollares cod ON c.CodigoCollar = cod.codigoCollar GROUP BY c.CodigoCollar, col.color,cod.largo,c.PrecioCompra");
+                datos.setearConsulta(@"
+                    SELECT  c.IDCollar,
+                            c.CodigoCollar,
+                            c.IDColor,
+                            c.IDCodigoCollar,
+                            c.PrecioCompra,
+                            c.Cantidad,
+                            col.color,
+                            cod.largo,
+                            cod.admiteDosLineas
+                    FROM Collares c
+                    INNER JOIN ColoresCollares  col ON c.IDColor        = col.idColor
+                    INNER JOIN CodigosCollares  cod ON c.IDCodigoCollar = cod.idCodigoCollar");
+
                 datos.ejecutarLectura();
 
-                   while(datos.Lector.Read())
+                while (datos.Lector.Read())
+                {
+                    Collar aux = new Collar();
+                    aux.IdCollar = Convert.ToInt32(datos.Lector["IDCollar"]);
+                    aux.CodigoCollar = datos.Lector["CodigoCollar"].ToString();
+                    aux.IdColor = Convert.ToInt32(datos.Lector["IDColor"]);
+                    aux.IdCodigoCollar = Convert.ToInt32(datos.Lector["IDCodigoCollar"]);
+                    aux.PrecioCompra = Convert.ToDecimal(datos.Lector["PrecioCompra"]);
+                    aux.Cantidad = Convert.ToInt32(datos.Lector["Cantidad"]);
+                    aux.AdmiteDosLineas = Convert.ToBoolean(datos.Lector["admiteDosLineas"]);
+                    aux.Color = new ColorCollar
                     {
-                        Collar aux = new Collar();
-                        aux.IdCollar = (int)datos.Lector["CodigoCollar"];
-                        aux.PrecioCompra = (decimal)datos.Lector["PrecioCompra"];
-                        aux.Cantidad = (int)datos.Lector["SumCantidad"];
-
-                        aux.Color = new ColorCollar();
-                        aux.Color.Color = (string)datos.Lector["color"];
-
-                        aux.Largo = new CodigoCollar();
-                        aux.Largo.Largo = (string)datos.Lector["largo"];
-
-                        lista.Add(aux);
-
-                    }
-                
-
+                        IdColor = Convert.ToInt32(datos.Lector["IDColor"]),
+                        Color = datos.Lector["color"].ToString()
+                    };
+                    aux.Largo = new CodigoCollar
+                    {
+                        IdCodigoCollar = Convert.ToInt32(datos.Lector["IDCodigoCollar"]),
+                        Largo = datos.Lector["largo"].ToString()
+                    };
+                    lista.Add(aux);
+                }
                 return lista;
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
+        public List<Collar> listarConStock()
+        {
+            List<Collar> lista = new List<Collar>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta(@"
+                    SELECT  c.IDCollar,
+                            c.CodigoCollar,
+                            c.IDColor,
+                            c.IDCodigoCollar,
+                            c.PrecioCompra,
+                            c.Cantidad,
+                            col.color,
+                            cod.largo,
+                            cod.admiteDosLineas
+                    FROM Collares c
+                    INNER JOIN ColoresCollares  col ON c.IDColor        = col.idColor
+                    INNER JOIN CodigosCollares  cod ON c.IDCodigoCollar = cod.idCodigoCollar
+                    WHERE c.Cantidad > 0");
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Collar aux = new Collar();
+                    aux.IdCollar = Convert.ToInt32(datos.Lector["IDCollar"]);
+                    aux.CodigoCollar = datos.Lector["CodigoCollar"].ToString();
+                    aux.IdColor = Convert.ToInt32(datos.Lector["IDColor"]);
+                    aux.IdCodigoCollar = Convert.ToInt32(datos.Lector["IDCodigoCollar"]);
+                    aux.PrecioCompra = Convert.ToDecimal(datos.Lector["PrecioCompra"]);
+                    aux.Cantidad = Convert.ToInt32(datos.Lector["Cantidad"]);
+                    aux.AdmiteDosLineas = Convert.ToBoolean(datos.Lector["admiteDosLineas"]);
+                    aux.Color = new ColorCollar
+                    {
+                        IdColor = Convert.ToInt32(datos.Lector["IDColor"]),
+                        Color = datos.Lector["color"].ToString()
+                    };
+                    aux.Largo = new CodigoCollar
+                    {
+                        IdCodigoCollar = Convert.ToInt32(datos.Lector["IDCodigoCollar"]),
+                        Largo = datos.Lector["largo"].ToString()
+                    };
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally
@@ -52,29 +123,29 @@ namespace negocio
         }
 
         public void agregar(Collar nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
             {
-                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta(@"
+                    INSERT INTO Collares (CodigoCollar, IDColor, IDCodigoCollar, PrecioCompra, Cantidad)
+                    VALUES (@codigoCollar, @idColor, @idCodigoCollar, @precioCompra, @cantidad)");
 
-                try
-                {
-                    datos.setearConsulta("INSERT INTO dbo.Collares (CodigoCollar, IDColor, PrecioCompra, Cantidad) VALUES (@codigocollar, @idcolor, @preciocompra, @cantidad)");
-                    datos.setearParametro("@codigocollar", nuevo.Largo.IdCodigoCollar);
-                    datos.setearParametro("@idcolor", nuevo.Color.IdColor);
-                    datos.setearParametro("@preciocompra", nuevo.PrecioCompra);
-                    datos.setearParametro("@cantidad", nuevo.Cantidad);
-                    
-                    datos.ejecutarAccion();
-                }
-                catch (Exception ex)
-                {
-
-                    throw ex;
-                }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
+                datos.setearParametro("@codigoCollar", nuevo.CodigoCollar);
+                datos.setearParametro("@idColor", nuevo.IdColor);
+                datos.setearParametro("@idCodigoCollar", nuevo.IdCodigoCollar);
+                datos.setearParametro("@precioCompra", nuevo.PrecioCompra);
+                datos.setearParametro("@cantidad", nuevo.Cantidad);
+                datos.ejecutarAccion();
             }
-       
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
