@@ -40,26 +40,26 @@
             this.cboMascota = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblCollar = new System.Windows.Forms.Label();
-            this.cboColor = new System.Windows.Forms.ComboBox();
-            this.lblColor = new System.Windows.Forms.Label();
-            this.lblPatron = new System.Windows.Forms.Label();
-            this.cboPatron = new System.Windows.Forms.ComboBox();
-            this.lblCantidad = new System.Windows.Forms.Label();
-            this.lblPrecio = new System.Windows.Forms.Label();
             this.txtPrecioUnitario = new System.Windows.Forms.TextBox();
+            this.lblPrecio = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
+            this.cboPatron = new System.Windows.Forms.ComboBox();
+            this.lblPatron = new System.Windows.Forms.Label();
+            this.lblColor = new System.Windows.Forms.Label();
+            this.cboColor = new System.Windows.Forms.ComboBox();
+            this.lblCollar = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblLinea1 = new System.Windows.Forms.Label();
-            this.txtDatoLinea1 = new System.Windows.Forms.TextBox();
             this.txtDatoLinea2 = new System.Windows.Forms.TextBox();
             this.lblDatoLinea2 = new System.Windows.Forms.Label();
+            this.txtDatoLinea1 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblLinea1 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lblTotalTexto = new System.Windows.Forms.Label();
-            this.lblTota = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.lblTota = new System.Windows.Forms.Label();
+            this.lblTotalTexto = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -74,6 +74,7 @@
             this.cboCliente.Name = "cboCliente";
             this.cboCliente.Size = new System.Drawing.Size(194, 28);
             this.cboCliente.TabIndex = 31;
+            this.cboCliente.SelectedIndexChanged += new System.EventHandler(this.cboCliente_SelectedIndexChanged);
             // 
             // cboCollar
             // 
@@ -82,6 +83,7 @@
             this.cboCollar.Name = "cboCollar";
             this.cboCollar.Size = new System.Drawing.Size(95, 28);
             this.cboCollar.TabIndex = 32;
+            this.cboCollar.SelectedIndexChanged += new System.EventHandler(this.cboCollar_SelectedIndexChanged);
             // 
             // dgvDetalles
             // 
@@ -116,7 +118,7 @@
             this.lblCliente.AutoSize = true;
             this.lblCliente.Location = new System.Drawing.Point(54, 61);
             this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(87, 30);
+            this.lblCliente.Size = new System.Drawing.Size(58, 20);
             this.lblCliente.TabIndex = 38;
             this.lblCliente.Text = "Cliente";
             this.lblCliente.Click += new System.EventHandler(this.label1_Click);
@@ -143,7 +145,7 @@
             this.lblMascota.AutoSize = true;
             this.lblMascota.Location = new System.Drawing.Point(54, 106);
             this.lblMascota.Name = "lblMascota";
-            this.lblMascota.Size = new System.Drawing.Size(105, 30);
+            this.lblMascota.Size = new System.Drawing.Size(70, 20);
             this.lblMascota.TabIndex = 41;
             this.lblMascota.Text = "Mascota";
             // 
@@ -152,14 +154,15 @@
             this.cboMascota.FormattingEnabled = true;
             this.cboMascota.Location = new System.Drawing.Point(146, 106);
             this.cboMascota.Name = "cboMascota";
-            this.cboMascota.Size = new System.Drawing.Size(194, 28);
+            this.cboMascota.Size = new System.Drawing.Size(280, 28);
             this.cboMascota.TabIndex = 42;
+            this.cboMascota.SelectedIndexChanged += new System.EventHandler(this.cboMascota_SelectedIndexChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.Location = new System.Drawing.Point(43, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(467, 139);
+            this.groupBox1.Size = new System.Drawing.Size(467, 143);
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del Pedido";
@@ -176,29 +179,54 @@
             this.groupBox2.Controls.Add(this.lblCollar);
             this.groupBox2.Controls.Add(this.cboCollar);
             this.groupBox2.Controls.Add(this.nudCantidad);
-            this.groupBox2.Location = new System.Drawing.Point(43, 198);
+            this.groupBox2.Location = new System.Drawing.Point(43, 211);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(467, 176);
             this.groupBox2.TabIndex = 44;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle del Collar";
             // 
-            // lblCollar
+            // txtPrecioUnitario
             // 
-            this.lblCollar.AutoSize = true;
-            this.lblCollar.Location = new System.Drawing.Point(11, 35);
-            this.lblCollar.Name = "lblCollar";
-            this.lblCollar.Size = new System.Drawing.Size(74, 30);
-            this.lblCollar.TabIndex = 39;
-            this.lblCollar.Text = "Collar";
+            this.txtPrecioUnitario.Location = new System.Drawing.Point(91, 133);
+            this.txtPrecioUnitario.Name = "txtPrecioUnitario";
+            this.txtPrecioUnitario.Size = new System.Drawing.Size(166, 26);
+            this.txtPrecioUnitario.TabIndex = 49;
             // 
-            // cboColor
+            // lblPrecio
             // 
-            this.cboColor.FormattingEnabled = true;
-            this.cboColor.Location = new System.Drawing.Point(276, 32);
-            this.cboColor.Name = "cboColor";
-            this.cboColor.Size = new System.Drawing.Size(120, 28);
-            this.cboColor.TabIndex = 43;
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(11, 136);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(53, 20);
+            this.lblPrecio.TabIndex = 48;
+            this.lblPrecio.Text = "Precio";
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Location = new System.Drawing.Point(192, 87);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(73, 20);
+            this.lblCantidad.TabIndex = 47;
+            this.lblCantidad.Text = "Cantidad";
+            // 
+            // cboPatron
+            // 
+            this.cboPatron.FormattingEnabled = true;
+            this.cboPatron.Location = new System.Drawing.Point(91, 84);
+            this.cboPatron.Name = "cboPatron";
+            this.cboPatron.Size = new System.Drawing.Size(95, 28);
+            this.cboPatron.TabIndex = 46;
+            // 
+            // lblPatron
+            // 
+            this.lblPatron.AutoSize = true;
+            this.lblPatron.Location = new System.Drawing.Point(11, 87);
+            this.lblPatron.Name = "lblPatron";
+            this.lblPatron.Size = new System.Drawing.Size(56, 20);
+            this.lblPatron.TabIndex = 45;
+            this.lblPatron.Text = "Patron";
             // 
             // lblColor
             // 
@@ -209,47 +237,22 @@
             this.lblColor.TabIndex = 44;
             this.lblColor.Text = "Color";
             // 
-            // lblPatron
+            // cboColor
             // 
-            this.lblPatron.AutoSize = true;
-            this.lblPatron.Location = new System.Drawing.Point(11, 87);
-            this.lblPatron.Name = "lblPatron";
-            this.lblPatron.Size = new System.Drawing.Size(84, 30);
-            this.lblPatron.TabIndex = 45;
-            this.lblPatron.Text = "Patron";
+            this.cboColor.FormattingEnabled = true;
+            this.cboColor.Location = new System.Drawing.Point(276, 32);
+            this.cboColor.Name = "cboColor";
+            this.cboColor.Size = new System.Drawing.Size(120, 28);
+            this.cboColor.TabIndex = 43;
             // 
-            // cboPatron
+            // lblCollar
             // 
-            this.cboPatron.FormattingEnabled = true;
-            this.cboPatron.Location = new System.Drawing.Point(91, 84);
-            this.cboPatron.Name = "cboPatron";
-            this.cboPatron.Size = new System.Drawing.Size(95, 28);
-            this.cboPatron.TabIndex = 46;
-            // 
-            // lblCantidad
-            // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(192, 87);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(110, 30);
-            this.lblCantidad.TabIndex = 47;
-            this.lblCantidad.Text = "Cantidad";
-            // 
-            // lblPrecio
-            // 
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(11, 136);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(80, 30);
-            this.lblPrecio.TabIndex = 48;
-            this.lblPrecio.Text = "Precio";
-            // 
-            // txtPrecioUnitario
-            // 
-            this.txtPrecioUnitario.Location = new System.Drawing.Point(91, 133);
-            this.txtPrecioUnitario.Name = "txtPrecioUnitario";
-            this.txtPrecioUnitario.Size = new System.Drawing.Size(166, 26);
-            this.txtPrecioUnitario.TabIndex = 49;
+            this.lblCollar.AutoSize = true;
+            this.lblCollar.Location = new System.Drawing.Point(11, 35);
+            this.lblCollar.Name = "lblCollar";
+            this.lblCollar.Size = new System.Drawing.Size(49, 20);
+            this.lblCollar.TabIndex = 39;
+            this.lblCollar.Text = "Collar";
             // 
             // groupBox3
             // 
@@ -258,37 +261,12 @@
             this.groupBox3.Controls.Add(this.txtDatoLinea1);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.lblLinea1);
-            this.groupBox3.Location = new System.Drawing.Point(43, 418);
+            this.groupBox3.Location = new System.Drawing.Point(43, 428);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(467, 176);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos de Bordado";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(192, 35);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 20);
-            this.label4.TabIndex = 44;
-            this.label4.Text = "Color";
-            // 
-            // lblLinea1
-            // 
-            this.lblLinea1.AutoSize = true;
-            this.lblLinea1.Location = new System.Drawing.Point(11, 35);
-            this.lblLinea1.Name = "lblLinea1";
-            this.lblLinea1.Size = new System.Drawing.Size(92, 30);
-            this.lblLinea1.TabIndex = 39;
-            this.lblLinea1.Text = "Linea 1";
-            // 
-            // txtDatoLinea1
-            // 
-            this.txtDatoLinea1.Location = new System.Drawing.Point(80, 32);
-            this.txtDatoLinea1.Name = "txtDatoLinea1";
-            this.txtDatoLinea1.Size = new System.Drawing.Size(240, 26);
-            this.txtDatoLinea1.TabIndex = 46;
             // 
             // txtDatoLinea2
             // 
@@ -307,23 +285,50 @@
             this.lblDatoLinea2.TabIndex = 47;
             this.lblDatoLinea2.Text = "Linea 2";
             // 
+            // txtDatoLinea1
+            // 
+            this.txtDatoLinea1.Location = new System.Drawing.Point(80, 32);
+            this.txtDatoLinea1.Name = "txtDatoLinea1";
+            this.txtDatoLinea1.Size = new System.Drawing.Size(240, 26);
+            this.txtDatoLinea1.TabIndex = 46;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(192, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 20);
+            this.label4.TabIndex = 44;
+            this.label4.Text = "Color";
+            // 
+            // lblLinea1
+            // 
+            this.lblLinea1.AutoSize = true;
+            this.lblLinea1.Location = new System.Drawing.Point(11, 35);
+            this.lblLinea1.Name = "lblLinea1";
+            this.lblLinea1.Size = new System.Drawing.Size(61, 20);
+            this.lblLinea1.TabIndex = 39;
+            this.lblLinea1.Text = "Linea 1";
+            // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(533, 347);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(149, 27);
+            this.btnAgregar.Size = new System.Drawing.Size(152, 40);
             this.btnAgregar.TabIndex = 46;
             this.btnAgregar.Text = "Agregar detalle";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnQuitar
             // 
             this.btnQuitar.Location = new System.Drawing.Point(788, 347);
             this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(149, 27);
+            this.btnQuitar.Size = new System.Drawing.Size(152, 40);
             this.btnQuitar.TabIndex = 47;
             this.btnQuitar.Text = "Quitar detalle";
             this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // groupBox4
             // 
@@ -337,37 +342,38 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Total";
             // 
-            // lblTotalTexto
+            // btnGuardar
             // 
-            this.lblTotalTexto.AutoSize = true;
-            this.lblTotalTexto.Location = new System.Drawing.Point(11, 35);
-            this.lblTotalTexto.Name = "lblTotalTexto";
-            this.lblTotalTexto.Size = new System.Drawing.Size(72, 30);
-            this.lblTotalTexto.TabIndex = 39;
-            this.lblTotalTexto.Text = "Total:";
+            this.btnGuardar.Location = new System.Drawing.Point(144, 116);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(149, 37);
+            this.btnGuardar.TabIndex = 47;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // lblTota
             // 
             this.lblTota.AutoSize = true;
             this.lblTota.Location = new System.Drawing.Point(140, 38);
             this.lblTota.Name = "lblTota";
-            this.lblTota.Size = new System.Drawing.Size(0, 30);
+            this.lblTota.Size = new System.Drawing.Size(0, 20);
             this.lblTota.TabIndex = 40;
             // 
-            // btnGuardar
+            // lblTotalTexto
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(144, 126);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(149, 27);
-            this.btnGuardar.TabIndex = 47;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.lblTotalTexto.AutoSize = true;
+            this.lblTotalTexto.Location = new System.Drawing.Point(11, 35);
+            this.lblTotalTexto.Name = "lblTotalTexto";
+            this.lblTotalTexto.Size = new System.Drawing.Size(48, 20);
+            this.lblTotalTexto.TabIndex = 39;
+            this.lblTotalTexto.Text = "Total:";
             // 
             // FrmPedido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1588, 605);
+            this.ClientSize = new System.Drawing.Size(1588, 724);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnQuitar);
             this.Controls.Add(this.btnAgregar);

@@ -16,5 +16,9 @@ namespace dominio
         
         public int IdCliente { get; set; }
         public Cliente Duenio { get; set; }
+
+        //Propiedad calculada para mostrar en el combo
+        public string ResumenMascota => $"{Nombre} | {TipoMascota} | {MedidaCollar}cm";
+        
     }
 }

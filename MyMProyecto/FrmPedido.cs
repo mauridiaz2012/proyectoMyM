@@ -33,7 +33,7 @@ namespace MyMProyecto
                 cboCliente.DisplayMember = "Nombre";
                 cboCliente.ValueMember = "IdCliente";
                 cboCliente.SelectedIndex = -1;
-                MessageBox.Show("Clientes OK");
+                //MessageBox.Show("Clientes OK");
 
                 // Collares
                 CollarNegocio collarNegocio = new CollarNegocio();
@@ -41,7 +41,7 @@ namespace MyMProyecto
                 cboCollar.DisplayMember = "CodigoCollar";
                 cboCollar.ValueMember = "IdCollar";
                 cboCollar.SelectedIndex = -1;
-                MessageBox.Show("Collares OK");
+                //MessageBox.Show("Collares OK");
 
                 // Colores
                 ColorCollarNegocio colorNegocio = new ColorCollarNegocio();
@@ -49,7 +49,7 @@ namespace MyMProyecto
                 cboColor.DisplayMember = "Color";
                 cboColor.ValueMember = "IdColor";
                 cboColor.SelectedIndex = -1;
-                MessageBox.Show("Colores OK");
+                //MessageBox.Show("Colores OK");
 
                 // Patrones
                 PatronNegocio patronNegocio = new PatronNegocio();
@@ -57,7 +57,7 @@ namespace MyMProyecto
                 cboPatron.DisplayMember = "NombrePatron";
                 cboPatron.ValueMember = "IdPatron";
                 cboPatron.SelectedIndex = -1;
-                MessageBox.Show("Patrones OK");
+                //MessageBox.Show("Patrones OK");
 
                 cboMascota.DataSource = null;
             }
@@ -72,7 +72,6 @@ namespace MyMProyecto
         private void ConfigurarGrilla()
         {
             dgvDetalles.AutoGenerateColumns = false;
-            dgvDetalles.DataSource = bindingDetalles;
             dgvDetalles.AllowUserToAddRows = false;
 
             dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn()
@@ -96,6 +95,7 @@ namespace MyMProyecto
                 Width = 100,
                 ReadOnly = true
             });
+            dgvDetalles.DataSource = bindingDetalles;
         }
 
         // Al cambiar el cliente, cargamos sus mascotas
@@ -109,15 +109,28 @@ namespace MyMProyecto
                 Cliente clienteSeleccionado = (Cliente)cboCliente.SelectedItem;
                 MascotaNegocio mascotaNegocio = new MascotaNegocio();
 
-                cboMascota.DataSource = mascotaNegocio.ObtenerPorCliente(clienteSeleccionado.IdCliente);
-                cboMascota.DisplayMember = "Nombre";
+                List<Mascota> mascotas = mascotaNegocio.ObtenerPorCliente(clienteSeleccionado.IdCliente);
+                
+                cboMascota.DisplayMember = "ResumenMascota";
                 cboMascota.ValueMember = "IdMascota";
+                cboMascota.DataSource = mascotas;
+               // cboMascota.DataSource = mascotaNegocio.ObtenerPorCliente(clienteSeleccionado.IdCliente);
+                
                 cboMascota.SelectedIndex = -1;
+               
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar mascotas: " + ex.Message);
             }
+        }
+
+        private void cboMascota_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboMascota.SelectedItem == null) return;
+
+            Mascota mascota = (Mascota)cboMascota.SelectedItem;
+           
         }
 
         // Al cambiar el collar, habilitamos o deshabilitamos DatoLinea2
@@ -126,6 +139,9 @@ namespace MyMProyecto
             if (cboCollar.SelectedItem == null) return;
 
             Collar collarSeleccionado = (Collar)cboCollar.SelectedItem;
+
+            //Debug
+            //MessageBox.Show($"Collar: {collarSeleccionado.CodigoCollar} - AdmiteDosLineas: {collarSeleccionado.AdmiteDosLineas}");
 
             // Si el collar admite dos líneas habilitamos el segundo campo
             txtDatoLinea2.Enabled = collarSeleccionado.AdmiteDosLineas;
@@ -150,12 +166,14 @@ namespace MyMProyecto
                 if (string.IsNullOrWhiteSpace(txtDatoLinea1.Text)) { MessageBox.Show("Ingrese el dato de bordado."); return; }
                 if (nudCantidad.Value <= 0) { MessageBox.Show("Ingrese una cantidad válida."); return; }
 
+                MessageBox.Show("Pasó todas las validaciones");
+
                 if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precioUnitario) || precioUnitario <= 0)
                 {
                     MessageBox.Show("Ingrese un precio válido.");
                     return;
                 }
-
+                MessageBox.Show("Precio OK: " + precioUnitario);
                 Collar collarSeleccionado = (Collar)cboCollar.SelectedItem;
                 ColorCollar colorSeleccionado = (ColorCollar)cboColor.SelectedItem;
                 Mascota mascotaSeleccionada = (Mascota)cboMascota.SelectedItem;
@@ -266,6 +284,5 @@ namespace MyMProyecto
 
         }
 
-    
     }
 }

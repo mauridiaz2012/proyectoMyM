@@ -48,13 +48,16 @@ namespace MyMProyecto
         private void listarClientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCliente listarClientes = new FrmCliente();
-            listarClientes.ShowDialog();
+            listarClientes.MdiParent = this;
+            listarClientes.Show();
         }
 
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmPedido pedido = new FrmPedido();
-            pedido.ShowDialog();
+            pedido.MdiParent= this;
+            pedido.Show();
+            // pedido.ShowDialog();
         }
     }
 }

@@ -45,9 +45,9 @@
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Location = new System.Drawing.Point(0, 33);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 81);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1532, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(2298, 57);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -61,7 +61,7 @@
             this.pedidosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1532, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(2298, 54);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -72,7 +72,7 @@
             this.modificarToolStripMenuItem,
             this.listarClientesToolStripMenuItem});
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(89, 50);
             this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // agregarToolStripMenuItem
@@ -102,20 +102,20 @@
             this.agregarToolStripMenuItem1,
             this.listarCollaresToolStripMenuItem});
             this.collaresToolStripMenuItem.Name = "collaresToolStripMenuItem";
-            this.collaresToolStripMenuItem.Size = new System.Drawing.Size(90, 29);
+            this.collaresToolStripMenuItem.Size = new System.Drawing.Size(90, 50);
             this.collaresToolStripMenuItem.Text = "Collares";
             // 
             // agregarToolStripMenuItem1
             // 
             this.agregarToolStripMenuItem1.Name = "agregarToolStripMenuItem1";
-            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(222, 34);
             this.agregarToolStripMenuItem1.Text = "Agregar";
             this.agregarToolStripMenuItem1.Click += new System.EventHandler(this.agregarToolStripMenuItem1_Click);
             // 
             // listarCollaresToolStripMenuItem
             // 
             this.listarCollaresToolStripMenuItem.Name = "listarCollaresToolStripMenuItem";
-            this.listarCollaresToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.listarCollaresToolStripMenuItem.Size = new System.Drawing.Size(222, 34);
             this.listarCollaresToolStripMenuItem.Text = "Listar Collares";
             this.listarCollaresToolStripMenuItem.Click += new System.EventHandler(this.listarCollaresToolStripMenuItem_Click);
             // 
@@ -124,13 +124,13 @@
             this.pedidosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuevoToolStripMenuItem});
             this.pedidosToolStripMenuItem.Name = "pedidosToolStripMenuItem";
-            this.pedidosToolStripMenuItem.Size = new System.Drawing.Size(91, 29);
+            this.pedidosToolStripMenuItem.Size = new System.Drawing.Size(91, 50);
             this.pedidosToolStripMenuItem.Text = "Pedidos";
             // 
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(166, 34);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
@@ -141,6 +141,7 @@
             this.ClientSize = new System.Drawing.Size(1532, 773);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
