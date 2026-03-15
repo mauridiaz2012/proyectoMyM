@@ -14,5 +14,6 @@ namespace dominio
         public string Direccion { get; set; }
         public RedSocial RedSocial { get; set; }
         public string NombreUsuario { get; set; }
+        public string ResumenCliente => $"{Nombre} | {NroTelefono}";
     }
 }

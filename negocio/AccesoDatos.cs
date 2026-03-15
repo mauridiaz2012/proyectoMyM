@@ -30,11 +30,13 @@ namespace negocio
         
         public void confirmarTransaccion()
         {
+            if(transaccion!=null) 
             transaccion.Commit();
         }
 
         public void revertirTransaccion()
         {
+            if(transaccion!=null)
             transaccion.Rollback();
         }
         public AccesoDatos()
@@ -108,6 +110,10 @@ namespace negocio
             {
                 throw ex;
             }
+        }
+        public void limpiarParametros()
+        {
+            comando.Parameters.Clear();
         }
     }
 }

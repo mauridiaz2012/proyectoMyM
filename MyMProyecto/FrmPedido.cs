@@ -19,6 +19,7 @@ namespace MyMProyecto
 
         private void FrmPedido_Load(object sender, EventArgs e)
         {
+            lblFechaValor.Text = DateTime.Now.ToString("dd/MM/yyyy");
             CargarCombos();
             ConfigurarGrilla();
         }
@@ -30,8 +31,9 @@ namespace MyMProyecto
                 // Clientes
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
                 cboCliente.DataSource = clienteNegocio.listar();
-                cboCliente.DisplayMember = "Nombre";
+                cboCliente.DisplayMember = "ResumenCliente";
                 cboCliente.ValueMember = "IdCliente";
+
                 cboCliente.SelectedIndex = -1;
                 //MessageBox.Show("Clientes OK");
 
@@ -166,14 +168,14 @@ namespace MyMProyecto
                 if (string.IsNullOrWhiteSpace(txtDatoLinea1.Text)) { MessageBox.Show("Ingrese el dato de bordado."); return; }
                 if (nudCantidad.Value <= 0) { MessageBox.Show("Ingrese una cantidad válida."); return; }
 
-                MessageBox.Show("Pasó todas las validaciones");
+                //MessageBox.Show("Pasó todas las validaciones");
 
                 if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precioUnitario) || precioUnitario <= 0)
                 {
                     MessageBox.Show("Ingrese un precio válido.");
                     return;
                 }
-                MessageBox.Show("Precio OK: " + precioUnitario);
+               // MessageBox.Show("Precio OK: " + precioUnitario);
                 Collar collarSeleccionado = (Collar)cboCollar.SelectedItem;
                 ColorCollar colorSeleccionado = (ColorCollar)cboColor.SelectedItem;
                 Mascota mascotaSeleccionada = (Mascota)cboMascota.SelectedItem;
@@ -194,6 +196,7 @@ namespace MyMProyecto
                     IdColor = colorSeleccionado.IdColor,
                     Mascota = mascotaSeleccionada,
                     IdMascota = mascotaSeleccionada.IdMascota,
+                    IdPatron = patronSeleccionado.IdPatron,
                     PatronBordado = patronSeleccionado.NombrePatron,
                     DatoLinea1 = txtDatoLinea1.Text.Trim(),
                     DatoLinea2 = collarSeleccionado.AdmiteDosLineas ? txtDatoLinea2.Text.Trim() : null,
@@ -217,7 +220,7 @@ namespace MyMProyecto
             foreach (var detalle in bindingDetalles)
                 totalPedido += detalle.Cantidad * detalle.PrecioUnitario;
 
-            lblTotal.Text = totalPedido.ToString("C");
+            lblTota.Text =totalPedido.ToString("C");
         }
 
         private void LimpiarControlesDetalle()

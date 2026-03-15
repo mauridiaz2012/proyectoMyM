@@ -70,9 +70,9 @@
             // cboCliente
             // 
             this.cboCliente.FormattingEnabled = true;
-            this.cboCliente.Location = new System.Drawing.Point(146, 61);
+            this.cboCliente.Location = new System.Drawing.Point(134, 61);
             this.cboCliente.Name = "cboCliente";
-            this.cboCliente.Size = new System.Drawing.Size(194, 28);
+            this.cboCliente.Size = new System.Drawing.Size(206, 28);
             this.cboCliente.TabIndex = 31;
             this.cboCliente.SelectedIndexChanged += new System.EventHandler(this.cboCliente_SelectedIndexChanged);
             // 
@@ -95,7 +95,7 @@
             this.dgvDetalles.RowHeadersWidth = 62;
             this.dgvDetalles.RowTemplate.Height = 28;
             this.dgvDetalles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalles.Size = new System.Drawing.Size(1004, 296);
+            this.dgvDetalles.Size = new System.Drawing.Size(934, 296);
             this.dgvDetalles.TabIndex = 33;
             // 
             // nudCantidad
@@ -152,9 +152,9 @@
             // cboMascota
             // 
             this.cboMascota.FormattingEnabled = true;
-            this.cboMascota.Location = new System.Drawing.Point(146, 106);
+            this.cboMascota.Location = new System.Drawing.Point(130, 106);
             this.cboMascota.Name = "cboMascota";
-            this.cboMascota.Size = new System.Drawing.Size(280, 28);
+            this.cboMascota.Size = new System.Drawing.Size(296, 28);
             this.cboMascota.TabIndex = 42;
             this.cboMascota.SelectedIndexChanged += new System.EventHandler(this.cboMascota_SelectedIndexChanged);
             // 
@@ -162,7 +162,7 @@
             // 
             this.groupBox1.Location = new System.Drawing.Point(43, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(467, 143);
+            this.groupBox1.Size = new System.Drawing.Size(489, 143);
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del Pedido";
@@ -181,7 +181,7 @@
             this.groupBox2.Controls.Add(this.nudCantidad);
             this.groupBox2.Location = new System.Drawing.Point(43, 211);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(467, 176);
+            this.groupBox2.Size = new System.Drawing.Size(489, 176);
             this.groupBox2.TabIndex = 44;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle del Collar";
@@ -263,7 +263,7 @@
             this.groupBox3.Controls.Add(this.lblLinea1);
             this.groupBox3.Location = new System.Drawing.Point(43, 428);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(467, 176);
+            this.groupBox3.Size = new System.Drawing.Size(489, 176);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos de Bordado";
@@ -373,7 +373,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1588, 724);
+            this.ClientSize = new System.Drawing.Size(1490, 633);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnQuitar);
             this.Controls.Add(this.btnAgregar);

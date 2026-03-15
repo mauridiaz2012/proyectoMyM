@@ -22,7 +22,7 @@ namespace dominio
 
         public int IdColor { get; set; }
         public int IdMascota {  get; set; }
-
+        public int IdPatron { get; set; }
         //Relaciones
         public Pedido Pedido { get; set; }
         public Collar Collar {  get; set; }
